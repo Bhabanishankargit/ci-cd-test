@@ -20,5 +20,6 @@ if [ $? -eq 0 ]
 then
 echo "Git is installed"
 else
+echo "#####Git is not installed#####>>>Going to install now<<<<<<<<<"
 install
 fi
