@@ -1,0 +1,28 @@
+pipeline{
+    agent any
+    stages{
+        stage('cloning git from remote to local'){
+            steps{
+                git branch: 'main', url: 'https://github.com/Bhabanishankargit/ci-cd-test.git'
+
+                }
+        }
+        stage('Git processing'){
+            steps{
+                sh 'git_install.sh'
+            }
+        }        
+        stage('Maven-processing'){
+            steps{
+                sh 'maven_install.sh'
+            }
+        }        
+        stage('building process'){
+            steps{
+                sh 'mvn install'
+            }
+        }
+    }
+}
+    
+    
