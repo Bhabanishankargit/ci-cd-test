@@ -3,17 +3,17 @@
 
 srpt=/etc/profile.d/maven.sh
 
-function  Download_maven () {
+function  Download_maven() {
 
-        wget https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz -P /tmp
+        wget https://dlcdn.apache.org/maven/maven-3/3.8.6/binaries/apache-maven-3.8.6-bin.tar.gz --no-check-certificate -P /tmp
         tar -zxf /tmp/apache-maven-3.8.6-bin.tar.gz  -C /opt
 }
 
-function create_exec_script () {
+function create_exec_script() {
 
         echo "Updating profile file"
         echo "export M2_HOME=/opt/apache-maven-3.8.6" >> ${srpt}
-        echo "export PATH=${M2_HOME}/bin:${PATH}" >> ${srpt}
+        echo "export PATH=/opt/apache-maven-3.8.6/bin:${PATH}" >> ${srpt}
         chmod +x /etc/profile.d/maven.sh
         echo "Applying new profile to update the current path"
         source /etc/profile.d/maven.sh
@@ -43,4 +43,3 @@ else
     create_exec_script
 
 fi
-
