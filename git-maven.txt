@@ -1,0 +1,28 @@
+pipeline{
+    agent any
+    environment{
+        PATH = "/opt/apache-maven-3.8.6/bin:${PATH}"
+    }
+    stages{
+        stage('git_checkout_local'){
+            steps{
+                git branch: 'master', url: 'https://github.com/Bhabanishankargit/ci-cd-test.git'
+            }
+        }
+        stage('maven_install'){
+            steps{
+                sh './maven_install.sh'
+            }
+        }
+        stage('building_package'){
+            steps{
+                sh 'mvn --version'
+            }
+        }
+        stage('build-code'){
+            steps{
+                sh 'mvn clean install'
+            }
+        }
+    }
+}
